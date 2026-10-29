@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramcee Jade L. Muñoz — BSIT | Web Developer & UI/UX Designer</title>
+  <meta name="description" content="Portfolio of Ramcee Jade L. Muñoz, Bachelor of Science in Information Technology (BSIT) student at Cebu Technological University - Argao Campus. Seeking OJT opportunities.">
+
+  <!-- Open Graph & Social Sharing (Facebook, Messenger, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ramcee Jade L. Muñoz — BSIT | Web Developer & UI/UX Designer">
+  <meta property="og:description" content="BSIT student at CTU Argao specializing in Web Development, Database Management, and UI/UX Design. Ready for OJT & internships.">
+  <meta property="og:image" content="./profile.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ramcee Jade L. Muñoz — Portfolio">
+  <meta name="twitter:description" content="BSIT student at CTU Argao specializing in Web Development, Database Management, and UI/UX Design.">
+  <meta name="twitter:image" content="./profile.jpg">
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'serif'],
+          },
+          colors: {
+            obsidian: {
+              950: '#07080a',
+              900: '#0d0f14',
+              850: '#12151c',
+              800: '#1a1e28',
+            },
+            champagne: {
+              50: '#fdfbf7',
+              100: '#f7f2e9',
+              200: '#eddcc5',
+              300: '#e0c29d',
+              400: '#d4af37', // Burnished gold
+              500: '#b89025',
+              600: '#94721a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Smooth transitions for theme toggling */
+    *, *::before, *::after {
+      transition-property: background-color, border-color, color, fill, stroke;
+      transition-duration: 200ms;
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Dark Theme Glow */
+    .dark .ambient-glow {
+      background: radial-gradient(circle at 50% -10%, rgba(212, 175, 55, 0.08) 0%, rgba(8, 9, 12, 0) 70%);
+    }
+
+    /* Light Theme Glow */
+    .ambient-glow {
+      background: radial-gradient(circle at 50% -10%, rgba(212, 175, 55, 0.12) 0%, rgba(251, 249, 245, 0) 70%);
+    }
+    
+    /* Glass Panel styling */
+    .glass-panel {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .dark .gold-gradient-text {
+      background: linear-gradient(135deg, #f7f2e9 20%, #e0c29d 60%, #b89158 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #27272a 10%, #996515 60%, #b8860b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Executive Navigation Link Hover & Active ScrollSpy */
+    .nav-link {
+      position: relative;
+      padding-top: 0.25rem;
+      padding-bottom: 0.35rem;
+      transition: color 200ms ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: linear-gradient(90deg, #d97706, #b45309);
+      transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 9999px;
+    }
+    .dark .nav-link::after {
+      background: linear-gradient(90deg, #d4af37, #eed6b3);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.65);
+    }
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+    .nav-link.active {
+      color: #b45309;
+      font-weight: 600;
+    }
+    .dark .nav-link.active {
+      color: #eed6b3;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(224, 194, 157, 0.4);
+    }
+
+    /* Mobile active nav link */
+    .mobile-nav-link {
+      transition: all 200ms ease;
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      display: block;
+    }
+    .mobile-nav-link.active {
+      color: #b45309;
+      background: rgba(217, 119, 6, 0.1);
+      font-weight: 600;
+    }
+    .dark .mobile-nav-link.active {
+      color: #eed6b3;
+      background: rgba(224, 194, 157, 0.12);
+      font-weight: 600;
+    }
+  </style>
+
+  <!-- Check Local Storage Theme on Initial Load -->
+  <script>
+    if (localStorage.getItem('theme') === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-[#fbf9f5] dark:bg-[#08090c] text-zinc-800 dark:text-zinc-200 selection:bg-champagne-400/20 selection:text-champagne-500 dark:selection:text-champagne-200">
+
+  <!-- Ambient Glow -->
+  <div class="fixed inset-0 ambient-glow pointer-events-none z-0"></div>
+
+  <!-- Full-Width Slim Executive Navigation Bar (Zero Excess Padding) -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-[#08090c]/90 backdrop-blur-md border-b border-stone-200/80 dark:border-zinc-800/80 transition-all duration-300" id="navbar">
+    <div class="w-full px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
+      
+      <!-- Left: Logo & Identity -->
+      <a href="#hero" class="flex items-center gap-2.5 group shrink-0">
+        <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-amber-600/40 dark:border-champagne-300/40 shadow-sm transition-transform duration-300 group-hover:scale-105">
+          <img src="./profile.jpg" alt="Ramcee Jade L. Muñoz" class="w-full h-full object-cover object-top">
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xs sm:text-sm font-semibold tracking-wide text-zinc-900 dark:text-zinc-100 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">Ramcee Jade</span>
+          <span class="text-[9px] sm:text-[10px] tracking-widest uppercase text-zinc-500 font-medium">BSIT &bull; CTU Argao</span>
+        </div>
+      </a>
+
+      <!-- Center: Wide Edge-to-Edge Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-xs uppercase tracking-widest font-medium text-zinc-600 dark:text-zinc-400" id="desktop-nav">
+        <a href="#about" class="nav-link hover:text-amber-700 dark:hover:text-champagne-200">About</a>
+        <a href="#projects" class="nav-link hover:text-amber-700 dark:hover:text-champagne-200">Projects</a>
+        <a href="#moodboard" class="nav-link hover:text-amber-700 dark:hover:text-champagne-200 flex items-center gap-1.5">
+          <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+          <span>UI/UX Prototypes</span>
+        </a>
+        <a href="#education" class="nav-link hover:text-amber-700 dark:hover:text-champagne-200">Education</a>
+        <a href="#skills" class="nav-link hover:text-amber-700 dark:hover:text-champagne-200">Certifications</a>
+        <a href="#leadership" class="nav-link hover:text-amber-700 dark:hover:text-champagne-200">Leadership</a>
+        <a href="#contact" class="nav-link hover:text-amber-700 dark:hover:text-champagne-200">Contact</a>
+      </nav>
+
+      <!-- Right: Controls & CTA -->
+      <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" aria-label="Toggle Theme" class="p-2 rounded-full bg-stone-100 dark:bg-obsidian-850 border border-stone-200 dark:border-zinc-700/60 text-zinc-700 dark:text-champagne-300 hover:scale-105 transition-transform cursor-pointer">
+          <!-- Sun Icon (shown in dark mode) -->
+          <i data-lucide="sun" id="theme-icon-sun" class="w-4 h-4 hidden dark:block"></i>
+          <!-- Moon Icon (shown in light mode) -->
+          <i data-lucide="moon" id="theme-icon-moon" class="w-4 h-4 block dark:hidden"></i>
+        </button>
+
+        <!-- Hire Me CTA -->
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase px-4 sm:px-5 py-2 rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 dark:from-champagne-300 dark:via-champagne-400 dark:to-champagne-500 text-white dark:text-obsidian-950 hover:brightness-110 transition-all shadow-sm">
+          <span>Hire Me</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="lg:hidden text-zinc-700 dark:text-zinc-400 p-1.5 rounded-lg hover:bg-stone-100 dark:hover:bg-obsidian-850 transition-colors cursor-pointer" aria-label="Toggle Navigation">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-stone-200 dark:border-zinc-800 bg-white/95 dark:bg-[#08090c]/95 backdrop-blur-md px-4 py-4 shadow-xl">
+      <div class="w-full flex flex-col gap-1 text-xs uppercase tracking-widest font-medium text-zinc-700 dark:text-zinc-300">
+        <a href="#about" class="mobile-nav-link hover:text-amber-700 dark:hover:text-champagne-200">About</a>
+        <a href="#projects" class="mobile-nav-link hover:text-amber-700 dark:hover:text-champagne-200">Projects</a>
+        <a href="#moodboard" class="mobile-nav-link hover:text-amber-700 dark:hover:text-champagne-200 flex items-center gap-2">
+          <i data-lucide="palette" class="w-4 h-4"></i> UI/UX Prototypes
+        </a>
+        <a href="#education" class="mobile-nav-link hover:text-amber-700 dark:hover:text-champagne-200">Education</a>
+        <a href="#skills" class="mobile-nav-link hover:text-amber-700 dark:hover:text-champagne-200">Certifications</a>
+        <a href="#leadership" class="mobile-nav-link hover:text-amber-700 dark:hover:text-champagne-200">Leadership</a>
+        <a href="#contact" class="mobile-nav-link hover:text-amber-700 dark:hover:text-champagne-200">Contact</a>
+        <div class="pt-2 border-t border-stone-200 dark:border-zinc-800 mt-2">
+          <a href="#contact" class="w-full inline-flex items-center justify-center gap-2 text-xs font-semibold tracking-wider uppercase px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-amber-500 dark:from-champagne-300 dark:to-champagne-400 text-white dark:text-obsidian-950">
+            <span>Hire Me</span>
+            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative z-10 pt-20 sm:pt-24 pb-24 max-w-6xl mx-auto px-6 space-y-28">
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-8 text-center flex flex-col items-center">
+      
+      <!-- Profile Picture with Luxury Border Frame -->
+      <div class="relative mb-8 group">
+        <div class="absolute -inset-1.5 rounded-full bg-gradient-to-tr from-amber-500/30 to-amber-300/10 dark:from-champagne-400/40 dark:to-champagne-200/10 blur-sm group-hover:from-amber-500/50 dark:group-hover:from-champagne-400/60 transition-all duration-500"></div>
+        <div class="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-2 border-amber-600/30 dark:border-champagne-300/40 p-1 bg-white dark:bg-obsidian-900 shadow-xl">
+          <img src="./profile.jpg" alt="Ramcee Jade L. Muñoz" class="w-full h-full object-cover object-top rounded-full transition-transform duration-500 group-hover:scale-105">
+        </div>
+      </div>
+
+      <!-- Availability Badge -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-500/10 dark:bg-champagne-400/[0.08] border border-amber-500/30 dark:border-champagne-400/25 text-amber-800 dark:text-champagne-200 text-xs font-medium tracking-wide mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-amber-600 dark:bg-champagne-300 animate-pulse"></span>
+        <span>Actively Seeking On-the-Job Training (OJT) & IT Internships</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="text-4xl sm:text-6xl font-light tracking-tight text-zinc-900 dark:text-white max-w-4xl leading-[1.15] mb-5 font-serif">
+        Ramcee Jade <span class="gold-gradient-text font-normal">L. Muñoz</span>
+      </h1>
+
+      <!-- Executive Subheadline -->
+      <p class="text-base sm:text-lg text-zinc-700 dark:text-zinc-300 max-w-2xl font-light leading-relaxed mb-3">
+        Bachelor of Science in Information Technology (BSIT) &bull; <span class="text-amber-800 dark:text-champagne-200 font-medium">Cebu Technological University – Argao Campus</span>
+      </p>
+
+      <p class="text-sm text-zinc-500 dark:text-zinc-400 max-w-2xl font-light leading-relaxed mb-8">
+        Full-Stack Web Developer, SQLite Database Architect, and UI/UX Designer. Focused on engineering practical, high-impact business systems and refined digital interfaces.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        <a href="#projects" class="px-7 py-3 rounded-full bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 dark:from-champagne-200 dark:via-champagne-300 dark:to-champagne-400 text-white dark:text-obsidian-950 font-semibold text-xs tracking-wider uppercase hover:brightness-105 transition-all shadow-lg shadow-amber-600/15 dark:shadow-champagne-400/15 inline-flex items-center gap-2">
+          <span>View Projects</span>
+          <i data-lucide="arrow-down" class="w-4 h-4"></i>
+        </a>
+        <a href="#contact" class="px-7 py-3 rounded-full glass-panel bg-white/80 dark:bg-obsidian-850/80 border border-stone-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 font-semibold text-xs tracking-wider uppercase hover:border-amber-600 dark:hover:border-champagne-300 transition-all inline-flex items-center gap-2">
+          <span>Connect With Me</span>
+          <i data-lucide="mail" class="w-4 h-4 text-amber-600 dark:text-champagne-300"></i>
+        </a>
+      </div>
+
+      <!-- Metadata Badges -->
+      <div class="flex flex-wrap items-center justify-center gap-6 mt-10 text-zinc-500 text-xs tracking-wider uppercase">
+        <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-amber-600 dark:text-champagne-300"></i> Dalaguete, Cebu, Philippines</span>
+        <span class="text-stone-300 dark:text-zinc-700 hidden sm:inline">&bull;</span>
+        <a href="https://github.com/Ramcee4" target="_blank" rel="noreferrer" class="hover:text-amber-700 dark:hover:text-champagne-200 transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4 fill-current text-amber-600 dark:text-champagne-300" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <span class="text-stone-300 dark:text-zinc-700 hidden sm:inline">&bull;</span>
+        <a href="https://www.linkedin.com/in/ramcee-jade-mu%C3%B1oz" target="_blank" rel="noreferrer" class="hover:text-amber-700 dark:hover:text-champagne-200 transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4 fill-current text-amber-600 dark:text-champagne-300" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+        <span class="text-stone-300 dark:text-zinc-700 hidden sm:inline">&bull;</span>
+        <a href="https://www.facebook.com/ramcee.jade" target="_blank" rel="noreferrer" class="hover:text-amber-700 dark:hover:text-champagne-200 transition-colors flex items-center gap-1.5">
+          <svg class="w-4 h-4 fill-current text-amber-600 dark:text-champagne-300" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Facebook</span>
+        </a>
+        <span class="text-stone-300 dark:text-zinc-700 hidden sm:inline">&bull;</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="graduation-cap" class="w-4 h-4 text-amber-600 dark:text-champagne-300"></i> CTU Argao BSIT</span>
+      </div>
+    </section>
+
+    <!-- About Section Container (Who Am I & Career Objective) -->
+    <section id="about" class="space-y-6 scroll-mt-20">
+
+      <!-- Who Am I Card -->
+      <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-[rgba(224,194,157,0.18)] rounded-3xl p-8 sm:p-10 shadow-sm dark:shadow-xl">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          <div class="space-y-4 max-w-3xl">
+            <div class="flex items-center gap-2 text-amber-700 dark:text-champagne-400 text-xs font-semibold uppercase tracking-widest">
+              <i data-lucide="user" class="w-4 h-4"></i>
+              <span>Who Am I</span>
+            </div>
+            
+            <h2 class="text-3xl sm:text-4xl font-serif font-light text-zinc-900 dark:text-white leading-tight">
+              An aspiring IT professional bridging database engineering with thoughtful UI/UX design.
+            </h2>
+
+            <div class="space-y-3 text-sm sm:text-base text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
+              <p>
+                I’m <strong class="text-zinc-900 dark:text-white font-medium">Ramcee Jade L. Muñoz</strong>, a BSIT student at <strong>Cebu Technological University – Argao Campus</strong>. I have a genuine passion for turning ideas into clean, practical digital solutions that are functional, intuitive, and built with purpose.
+              </p>
+              <p>
+                Whether designing interfaces in Figma, structuring databases with SQLite, or developing full-stack web applications, I focus on creating software that solves real everyday challenges. Through hands-on academic projects and student leadership, I’ve learned the value of disciplined teamwork, accountability, and constantly refining my craft.
+              </p>
+            </div>
+
+            <!-- Identity Badges / Pillars -->
+            <div class="grid sm:grid-cols-3 gap-3 pt-2">
+              <div class="p-3.5 rounded-xl bg-stone-50 dark:bg-obsidian-950/60 border border-stone-200 dark:border-zinc-800/80">
+                <div class="flex items-center gap-2 text-xs font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+                  <i data-lucide="code-2" class="w-3.5 h-3.5 text-amber-600 dark:text-champagne-300"></i>
+                  <span>Full-Stack Builder</span>
+                </div>
+                <p class="text-[11px] text-zinc-500 font-light leading-snug">
+                  Clean web architecture, CRUD databases & SQLite schemas.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-stone-50 dark:bg-obsidian-950/60 border border-stone-200 dark:border-zinc-800/80">
+                <div class="flex items-center gap-2 text-xs font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+                  <i data-lucide="palette" class="w-3.5 h-3.5 text-amber-600 dark:text-champagne-300"></i>
+                  <span>UI/UX Designer</span>
+                </div>
+                <p class="text-[11px] text-zinc-500 font-light leading-snug">
+                  Certified Figma designer focused on aesthetic clarity & workflows.
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-stone-50 dark:bg-obsidian-950/60 border border-stone-200 dark:border-zinc-800/80">
+                <div class="flex items-center gap-2 text-xs font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+                  <i data-lucide="award" class="w-3.5 h-3.5 text-amber-600 dark:text-champagne-300"></i>
+                  <span>Leader & Learner</span>
+                </div>
+                <p class="text-[11px] text-zinc-500 font-light leading-snug">
+                  Logistic Committee officer & High School honors graduate.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Bio Sidebar Card -->
+          <div class="lg:w-72 shrink-0 p-5 rounded-2xl bg-stone-50 dark:bg-obsidian-950/70 border border-stone-200 dark:border-zinc-800/80 space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-full overflow-hidden border border-amber-600/40 dark:border-champagne-300/40 shrink-0">
+                <img src="./profile.jpg" alt="Ramcee Jade L. Muñoz" class="w-full h-full object-cover object-top">
+              </div>
+              <div>
+                <div class="text-sm font-serif font-medium text-zinc-900 dark:text-white">Ramcee Jade Muñoz</div>
+                <div class="text-[10px] text-zinc-500 uppercase tracking-wider font-medium">BSIT &bull; CTU Argao</div>
+              </div>
+            </div>
+
+            <div class="space-y-2.5 text-xs text-zinc-600 dark:text-zinc-400 pt-2 border-t border-stone-200 dark:border-zinc-800/70">
+              <div class="flex items-center justify-between">
+                <span class="text-zinc-500 text-[11px]">Campus</span>
+                <span class="font-medium text-zinc-800 dark:text-zinc-200">CTU Argao</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-zinc-500 text-[11px]">Degree</span>
+                <span class="font-medium text-zinc-800 dark:text-zinc-200">BS Info Tech</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-zinc-500 text-[11px]">Hometown</span>
+                <span class="font-medium text-zinc-800 dark:text-zinc-200">Dalaguete, Cebu</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-zinc-500 text-[11px]">Status</span>
+                <span class="inline-flex items-center gap-1.5 font-medium text-emerald-700 dark:text-emerald-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Ready for OJT
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Career Objective Card -->
+      <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-[rgba(224,194,157,0.18)] rounded-3xl p-8 sm:p-10 shadow-sm dark:shadow-xl">
+        <div class="max-w-3xl">
+          <div class="flex items-center gap-2 text-amber-700 dark:text-champagne-400 text-xs font-semibold uppercase tracking-widest mb-2">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+            <span>Career Objective</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-serif font-light text-zinc-900 dark:text-white mb-4">Dedicated to technical excellence & professional growth</h2>
+          <p class="text-sm sm:text-base text-zinc-700 dark:text-zinc-300 font-light leading-relaxed">
+            &ldquo;To obtain an On-the-Job Training opportunity where I can apply my knowledge and skills as a Bachelor of Science in Information Technology (BSIT) student. I am eager to learn new technologies, gain hands-on experience, enhance my technical and problem-solving skills, improve my communication and teamwork abilities, and develop professional work ethics to prepare for a successful career in the IT industry.&rdquo;
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Quick Highlights -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 p-6 rounded-2xl text-center shadow-sm">
+        <div class="text-2xl sm:text-3xl font-serif text-zinc-900 dark:text-white mb-1">BSIT</div>
+        <div class="text-xs uppercase tracking-wider text-zinc-500 font-medium">Undergraduate</div>
+      </div>
+      <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 p-6 rounded-2xl text-center shadow-sm">
+        <div class="text-2xl sm:text-3xl font-serif text-amber-700 dark:text-champagne-300 mb-1">With Honors</div>
+        <div class="text-xs uppercase tracking-wider text-zinc-500 font-medium">Senior High School</div>
+      </div>
+      <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 p-6 rounded-2xl text-center shadow-sm">
+        <div class="text-2xl sm:text-3xl font-serif text-zinc-900 dark:text-white mb-1">Officer</div>
+        <div class="text-xs uppercase tracking-wider text-zinc-500 font-medium">Logistic Committee</div>
+      </div>
+      <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 p-6 rounded-2xl text-center shadow-sm">
+        <div class="text-2xl sm:text-3xl font-serif text-amber-700 dark:text-champagne-200 mb-1">7+</div>
+        <div class="text-xs uppercase tracking-wider text-zinc-500 font-medium">Certifications</div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="space-y-10 scroll-mt-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-stone-200 dark:border-zinc-800/80 pb-6">
+        <div>
+          <span class="text-amber-700 dark:text-champagne-400 text-xs font-semibold uppercase tracking-widest">Portfolio Showcase</span>
+          <h2 class="text-3xl sm:text-4xl font-serif font-light text-zinc-900 dark:text-white mt-1">Featured Projects</h2>
+        </div>
+        <p class="text-sm text-zinc-500 max-w-md font-light">
+          Real application systems, database designs, and interactive prototypes built during A.Y. 2023 – 2026.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        
+        <!-- Project 1: Big Brew Ordering System -->
+        <article class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-3xl p-6 sm:p-8 flex flex-col justify-between group transition-all duration-300 hover:shadow-xl dark:hover:border-champagne-300/30">
+          <div>
+            <!-- Image Showcase -->
+            <div class="w-full h-56 rounded-2xl overflow-hidden mb-6 relative border border-stone-200 dark:border-zinc-800 bg-stone-900">
+              <img src="./big-brew.jpg" alt="Big Brew Ordering System" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
+                <span class="font-medium bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md">Argao Branch, Cebu</span>
+                <span class="bg-amber-600/90 text-white font-semibold px-2 py-0.5 rounded text-[10px] uppercase">Live System</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-amber-500/10 text-amber-800 dark:text-champagne-300 border border-amber-500/20">POS & Ordering</span>
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-stone-100 dark:bg-obsidian-950 text-zinc-600 dark:text-zinc-400 border border-stone-200 dark:border-zinc-800">Web & Database</span>
+            </div>
+            
+            <h3 class="text-2xl font-serif text-zinc-900 dark:text-white mb-2 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Big Brew Ordering System
+            </h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-6">
+              Complete customer ordering and cashier system engineered for Big Brew (San Miguel St, Argao). Features user authentication, menu item selection, order queue processing, and sales receipt logging.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200 dark:border-zinc-800/80">
+            <span class="text-xs text-zinc-500 font-medium">A.Y. 2023 - 2026 &bull; School Project</span>
+            <span class="inline-flex items-center gap-1.5 text-xs font-medium text-zinc-500">
+              <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-amber-600 dark:text-champagne-300"></i>
+              <span>Completed System</span>
+            </span>
+          </div>
+        </article>
+
+        <!-- Project 2: Full-Stack SQLite Application (Aura Period Tracker) -->
+        <article class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-3xl p-6 sm:p-8 flex flex-col justify-between group transition-all duration-300 hover:shadow-xl dark:hover:border-champagne-300/30">
+          <div>
+            <!-- Image Showcase -->
+            <div class="w-full h-56 rounded-2xl overflow-hidden mb-6 relative border border-stone-200 dark:border-zinc-800 bg-gradient-to-br from-pink-50 to-stone-100 dark:from-obsidian-950 dark:to-obsidian-900 flex items-center justify-center p-2 cursor-pointer" onclick="openLightbox('./period-tracker.png', 'Aura Period Tracker — Full-Stack SQLite iOS Application', 'https://github.com/Ramcee4/IOS_Project-Team-Aura-.git')">
+              <img src="./period-tracker.png" alt="Aura Period Tracker - SQLite Application" class="h-full object-contain rounded-xl shadow-md group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute bottom-3 right-3">
+                <span class="bg-pink-600 text-white font-semibold px-2 py-0.5 rounded text-[10px] uppercase shadow-sm">SQLite &bull; iOS</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-pink-500/10 text-pink-700 dark:text-pink-300 border border-pink-500/20">Full-Stack Database</span>
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-stone-100 dark:bg-obsidian-950 text-zinc-600 dark:text-zinc-400 border border-stone-200 dark:border-zinc-800">SQLite &bull; iOS</span>
+            </div>
+            
+            <h3 class="text-2xl font-serif text-zinc-900 dark:text-white mb-2 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Full-Stack SQLite Application (Aura Period Tracker)
+            </h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-6">
+              Complete database-driven web and iOS application featuring structured CRUD operations, relational schema design, query optimization, secure user authentication, and responsive user interfaces.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200 dark:border-zinc-800/80">
+            <span class="text-xs text-zinc-500 font-medium">Team Aura &bull; iOS & SQLite</span>
+            <a href="https://github.com/Ramcee4/IOS_Project-Team-Aura-.git" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Repository</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 3: CiteFlow Capstone Project -->
+        <article class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-3xl p-6 sm:p-8 flex flex-col justify-between group transition-all duration-300 hover:shadow-xl dark:hover:border-champagne-300/30">
+          <div>
+            <!-- Image Showcase -->
+            <div class="w-full h-56 rounded-2xl overflow-hidden mb-6 relative border border-stone-200 dark:border-zinc-800 bg-stone-900 cursor-pointer" onclick="openLightbox('./citeflow.png', 'CiteFlow: Administrative & Faculty Management System (COTE)', 'https://github.com/CoolKaitoKid/citeflow.git')">
+              <img src="./citeflow.png" alt="CiteFlow Capstone Project - College of Technology and Engineering" class="w-full h-full object-cover object-left-top group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
+                <span class="font-medium bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md">CTU Argao &bull; COTE</span>
+                <span class="bg-amber-700 text-white font-semibold px-2 py-0.5 rounded text-[10px] uppercase">Capstone Project</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-amber-500/10 text-amber-800 dark:text-champagne-300 border border-amber-500/20">IT Capstone</span>
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-stone-100 dark:bg-obsidian-950 text-zinc-600 dark:text-zinc-400 border border-stone-200 dark:border-zinc-800">Faculty Portal</span>
+            </div>
+            
+            <h3 class="text-2xl font-serif text-zinc-900 dark:text-white mb-2 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              CiteFlow: Administrative & Faculty Management System
+            </h3>
+            
+            <p class="text-[11px] uppercase tracking-wider text-amber-700 dark:text-champagne-400 font-medium mb-3">
+              College of Technology and Engineering (COTE)
+            </p>
+
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-6">
+              The general objective of this study is to design, develop, and evaluate <strong>CiteFlow</strong> to improve the efficiency, accuracy, and organization of faculty records, report submissions, and compliance monitoring in the College of Technology and Engineering.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200 dark:border-zinc-800/80">
+            <span class="text-xs text-zinc-500 font-medium">A.Y. 2023 - 2026 &bull; CTU Argao</span>
+            <a href="https://github.com/CoolKaitoKid/citeflow.git" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Repository</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 4: CampusConnect - Student Community & Campus Portal -->
+        <article class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-3xl p-6 sm:p-8 flex flex-col justify-between group transition-all duration-300 hover:shadow-xl dark:hover:border-champagne-300/30">
+          <div>
+            <!-- Image Showcase -->
+            <div class="w-full h-56 rounded-2xl overflow-hidden mb-6 relative border border-stone-200 dark:border-zinc-800 bg-stone-900 cursor-pointer" onclick="openLightbox('./figma-ui-system.png', 'CampusConnect — Student Community & Campus Portal (Team Quintet Coder)', 'https://github.com/Ramcee4/Myprojects-.git')">
+              <img src="./figma-ui-system.png" alt="CampusConnect Platform Wireframes" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
+                <span class="font-medium bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md">Team Quintet Coder</span>
+                <span class="bg-red-700 text-white font-semibold px-2 py-0.5 rounded text-[10px] uppercase">Campus Portal</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-red-500/10 text-red-700 dark:text-red-300 border border-red-500/20">Community Platform</span>
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-stone-100 dark:bg-obsidian-950 text-zinc-600 dark:text-zinc-400 border border-stone-200 dark:border-zinc-800">Collaborative</span>
+            </div>
+            
+            <h3 class="text-2xl font-serif text-zinc-900 dark:text-white mb-2 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              CampusConnect: Student Community & Campus Portal
+            </h3>
+            
+            <p class="text-[11px] uppercase tracking-wider text-amber-700 dark:text-champagne-400 font-medium mb-3">
+              Team Quintet Coder &bull; CTU Campus Networking
+            </p>
+
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-6">
+              Interactive campus community platform designed to bridge student interactions, campus activity calendars, organization announcements, peer messaging channels, and administrative bulletin updates.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200 dark:border-zinc-800/80">
+            <a href="https://www.figma.com/design/PAlMhCnzsfH13EHXth7WYb/Team-Quintet-Coder--Capstone-Project?node-id=1-2&t=1vLyDjmeuIhyXFwG-1" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-zinc-500 hover:text-amber-700 dark:hover:text-champagne-300 transition-colors">
+              <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+              <span>Figma Prototype</span>
+            </a>
+            <a href="https://github.com/Ramcee4/Myprojects-.git" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Repository</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Project 5: UI/UX Design Systems & Figma Architecture -->
+        <article id="project-design-card" class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-3xl p-6 sm:p-8 flex flex-col justify-between group transition-all duration-300 hover:shadow-xl dark:hover:border-champagne-300/30">
+          <div>
+            <!-- Image Showcase -->
+            <div class="w-full h-56 rounded-2xl overflow-hidden mb-6 relative border border-stone-200 dark:border-zinc-800 bg-stone-900 cursor-pointer" onclick="toggleMoodboard()">
+              <img src="./figma-kickzone.png" alt="UI/UX Design Systems & Figma Architecture" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
+                <span class="font-medium bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md">Figma Design Systems</span>
+                <span class="bg-amber-600/90 text-white font-semibold px-2 py-0.5 rounded text-[10px] uppercase">5 Projects</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-amber-500/10 text-amber-800 dark:text-champagne-300 border border-amber-500/20">Design Systems</span>
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-stone-100 dark:bg-obsidian-950 text-zinc-600 dark:text-zinc-400 border border-stone-200 dark:border-zinc-800">Wireframes & Flows</span>
+            </div>
+            
+            <h3 class="text-2xl font-serif text-zinc-900 dark:text-white mb-2 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              UI/UX Design Systems & Figma Architecture
+            </h3>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-6">
+              Interactive high-fidelity prototypes and full-scale UI layout systems created in Figma. Explore the interactive visual design studio featuring Ming 24, Kickzone, CebGapp, Parsers, and Capstone flows.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200 dark:border-zinc-800/80">
+            <span class="text-xs text-zinc-500 font-medium">Figma &bull; UI/UX Essentials</span>
+            <button id="toggle-moodboard-btn" type="button" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-champagne-300 hover:underline cursor-pointer group">
+              <span id="toggle-moodboard-text">Explore UI/UX Prototypes</span>
+              <i id="toggle-moodboard-icon" data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Project 6: R Website - Interactive Midterm Project -->
+        <article class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-3xl p-6 sm:p-8 flex flex-col justify-between group transition-all duration-300 hover:shadow-xl dark:hover:border-champagne-300/30">
+          <div>
+            <!-- Image Showcase -->
+            <div class="w-full h-56 rounded-2xl overflow-hidden mb-6 relative border border-stone-200 dark:border-zinc-800 bg-stone-900 cursor-pointer" onclick="openLightbox('./r-website.png', 'R Website — Interactive Web Development (Midterm Project)', 'https://github.com/Ramcee4/Myprojects-.git')">
+              <img src="./r-website.png" alt="R Website - Interactive Midterm Web Project" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent"></div>
+              <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
+                <span class="font-medium bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-md">Web Development &bull; Midterm</span>
+                <span class="bg-amber-600/90 text-white font-semibold px-2 py-0.5 rounded text-[10px] uppercase">Interactive UI</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-amber-500/10 text-amber-800 dark:text-champagne-300 border border-amber-500/20">Midterm Project</span>
+              <span class="text-[11px] font-medium tracking-wider uppercase px-3 py-1 rounded-full bg-stone-100 dark:bg-obsidian-950 text-zinc-600 dark:text-zinc-400 border border-stone-200 dark:border-zinc-800">HTML &bull; CSS &bull; JS</span>
+            </div>
+            
+            <h3 class="text-2xl font-serif text-zinc-900 dark:text-white mb-2 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              R Website — Interactive Web Development
+            </h3>
+            
+            <p class="text-[11px] uppercase tracking-wider text-amber-700 dark:text-champagne-400 font-medium mb-3">
+              Personal Showcase &bull; &ldquo;Always choose the right thing&rdquo;
+            </p>
+
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-6">
+              This midterm project focuses on creating an interactive webpage using HTML, CSS, and JavaScript. It highlights key features such as dynamic content, responsive design, interactive photo carousels, and engaging user interactions.
+            </p>
+          </div>
+
+          <div class="flex items-center justify-between pt-4 border-t border-stone-200 dark:border-zinc-800/80">
+            <span class="text-xs text-zinc-500 font-medium">A.Y. 2023 - 2026 &bull; CTU Argao</span>
+            <a href="https://github.com/Ramcee4/Myprojects-.git" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Repository</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Figma Design Moodboard & Creative Studio Section (Toggled by Explore Moodboard) -->
+    <section id="moodboard" class="space-y-12 hidden transition-all duration-500 scroll-mt-20">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-stone-200 dark:border-zinc-800/80 pb-6">
+        <div>
+          <span class="text-amber-700 dark:text-champagne-400 text-xs font-semibold uppercase tracking-widest flex items-center gap-1.5">
+            <i data-lucide="palette" class="w-4 h-4"></i> Figma UI/UX Studio
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-serif font-light text-zinc-900 dark:text-white mt-1">UI/UX Design Prototypes & Systems</h2>
+        </div>
+        <p class="text-sm text-zinc-500 max-w-md font-light">
+          Visual identities, color theory, wireframe flows, and UI systems authored by Ramcee Jade L. Muñoz. Click any project to open directly in Figma.
+        </p>
+      </div>
+
+      <!-- Figma Project Moodboard Cards (5 Curated Designs) -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Moodboard Item 1: Ming 24 (Chinese Kitchen Kiosk Web App) -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./figma-ming24.png', 'Ming 24 — Chinese Kitchen Kiosk Web App', 'https://www.figma.com/design/bVyIDUNEkO5SfwbZP2ZStS/Kios-Web-App?node-id=72-583&t=ynNJ1H14cSXOqrPS-1')">
+              <img src="./figma-ming24.png" alt="Ming 24 Kiosk Web App Figma Design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Click to Zoom
+                </span>
+              </div>
+            </div>
+
+            <!-- Color Palette Swatches -->
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Color Palette</span>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #6d1112;" title="Crimson Red #6d1112"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #f3efe6;" title="Warm Linen #f3efe6"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #d4af37;" title="Gold #d4af37"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #18181b;" title="Charcoal #18181b"></span>
+              </div>
+            </div>
+
+            <h4 class="text-lg font-serif text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Ming 24 — Kiosk Web App
+            </h4>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Modern digital kiosk interface for Chinese Kitchen street-food ordering. Bold typography, appetite-stimulating crimson mood, and clear category navigation.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">Kiosk UI &bull; E-Commerce</span>
+            <a href="https://www.figma.com/design/bVyIDUNEkO5SfwbZP2ZStS/Kios-Web-App?node-id=72-583&t=ynNJ1H14cSXOqrPS-1" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Open in Figma</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Moodboard Item 2: Kickzone (Pottery & Simplicity E-Commerce) -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./figma-kickzone.png', 'Kickzone — Minimalist Ceramics E-Commerce', 'https://www.figma.com/design/nQNlJf4LskNLRAwN91x6Jf/Udemy-Course-project?node-id=33-311&t=K8nQv04JBifS9NSF-1')">
+              <img src="./figma-kickzone.png" alt="Kickzone Minimalist Pottery E-Commerce Figma Design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Click to Zoom
+                </span>
+              </div>
+            </div>
+
+            <!-- Color Palette Swatches -->
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Color Palette</span>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #25365e;" title="Indigo Navy #25365e"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #8ca0bc;" title="Ceramic Slate #8ca0bc"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #c7653d;" title="Terracotta #c7653d"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #f1f3f7;" title="Studio Grey #f1f3f7"></span>
+              </div>
+            </div>
+
+            <h4 class="text-lg font-serif text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Kickzone — Artisanal Ceramics
+            </h4>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              "The Art of Simplicity" — editorial lifestyle storefront layout showcasing handcrafted pottery, circular feature cutouts, and serene color balancing.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">Editorial E-Commerce</span>
+            <a href="https://www.figma.com/design/nQNlJf4LskNLRAwN91x6Jf/Udemy-Course-project?node-id=33-311&t=K8nQv04JBifS9NSF-1" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Open in Figma</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Moodboard Item 3: CebGapp (Monthly Allowance & Savings) -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./figma-cebgapp.png', 'CebGapp — Monthly Allowance & Savings Tracker', 'https://www.figma.com/design/8Gw8H4FSnDNA4PDddTLs9X/Montlhyallowance-saving?m=auto&t=bTc8ISyHAtuTgm7U-6')">
+              <img src="./figma-cebgapp.png" alt="CebGapp Monthly Allowance Savings Figma Design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Click to Zoom
+                </span>
+              </div>
+            </div>
+
+            <!-- Color Palette Swatches -->
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Color Palette</span>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #bbf7d0;" title="Mint Green #bbf7d0"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #22c55e;" title="Growth Emerald #22c55e"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #cbd5e1;" title="Soft Slate #cbd5e1"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #18181b;" title="Ink #18181b"></span>
+              </div>
+            </div>
+
+            <h4 class="text-lg font-serif text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              CebGapp — Allowance Tracker
+            </h4>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              "Save a little today, Thrive a lot tomorrow." Fresh mint fintech onboarding screen designed to help students track allowances, cash flow, and savings goals.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">FinTech &bull; Student App</span>
+            <a href="https://www.figma.com/design/8Gw8H4FSnDNA4PDddTLs9X/Montlhyallowance-saving?m=auto&t=bTc8ISyHAtuTgm7U-6" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Open in Figma</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Moodboard Item 4: Parsers Portal (CTU Campus Identity) -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./figma-parsers.jpg', 'Parsers Portal — Campus Identity & Authentication', 'https://www.figma.com/design/HBHqJz1liqe8l0LaA9YMbF/IHCI-seth-khyan?node-id=0-1&t=Bhh4f6L0zhzXk5sZ-1')">
+              <img src="./figma-parsers.jpg" alt="Parsers CTU Student Portal Figma Design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Click to Zoom
+                </span>
+              </div>
+            </div>
+
+            <!-- Color Palette Swatches -->
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Color Palette</span>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #dc2626;" title="Panther Red #dc2626"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #f8fafc;" title="White #f8fafc"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #15803d;" title="Campus Green #15803d"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #991b1b;" title="Deep Crimson #991b1b"></span>
+              </div>
+            </div>
+
+            <h4 class="text-lg font-serif text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Parsers Student Portal
+            </h4>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Academic organization sign-in portal featuring CTU Science & Technology campus scenery, brand identity, and clean secure form fields.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">Campus Authentication</span>
+            <a href="https://www.figma.com/design/HBHqJz1liqe8l0LaA9YMbF/IHCI-seth-khyan?node-id=0-1&t=Bhh4f6L0zhzXk5sZ-1" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Open in Figma</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Moodboard Item 5: CampusConnect (Team Quintet Coder) -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.15)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300 md:col-span-2 lg:col-span-2">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./figma-ui-system.png', 'CampusConnect — Multi-Screen UI Architecture & Flow (Team Quintet Coder)', 'https://github.com/Ramcee4/Myprojects-.git')">
+              <img src="./figma-ui-system.png" alt="CampusConnect Team Quintet Coder Figma Wireframes" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Click to Zoom Full Wireframe Grid
+                </span>
+              </div>
+            </div>
+
+            <!-- Color Palette Swatches -->
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-[10px] uppercase tracking-wider text-zinc-500 font-medium">Color Palette</span>
+              <div class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #991b1b;" title="Ruby Red #991b1b"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #fef08a;" title="Gold Yellow #fef08a"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #09090b;" title="Obsidian #09090b"></span>
+                <span class="w-4 h-4 rounded-full border border-black/10" style="background-color: #ffffff;" title="White #ffffff"></span>
+              </div>
+            </div>
+
+            <h4 class="text-lg font-serif text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              CampusConnect — Multi-Screen UI & Component Hierarchy
+            </h4>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Comprehensive design system authored by Team Quintet Coder covering 30+ responsive application states: campus calendar scheduler, activity event feeds, profile views, anonymous messaging channels, and administrative modals.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <a href="https://www.figma.com/design/PAlMhCnzsfH13EHXth7WYb/Team-Quintet-Coder--Capstone-Project?node-id=1-2&t=1vLyDjmeuIhyXFwG-1" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-amber-700 dark:hover:text-champagne-300 transition-colors">
+              <i data-lucide="palette" class="w-3.5 h-3.5"></i>
+              <span>Open in Figma</span>
+            </a>
+            <a href="https://github.com/Ramcee4/Myprojects-.git" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <span>GitHub Repo</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Hide Moodboard Button at Bottom -->
+      <div class="text-center pt-2 pb-4">
+        <button onclick="toggleMoodboard()" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-stone-100 dark:bg-obsidian-850 border border-stone-300 dark:border-zinc-700 text-xs font-semibold uppercase tracking-wider text-zinc-700 dark:text-zinc-300 hover:text-amber-700 dark:hover:text-champagne-300 hover:border-amber-600 dark:hover:border-champagne-300 transition-all shadow-sm cursor-pointer group">
+          <span>Collapse UI/UX Prototypes</span>
+          <i data-lucide="chevron-up" class="w-4 h-4 transition-transform group-hover:-translate-y-0.5"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal for Figma Moodboard -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+      <div class="glass-panel bg-white/95 dark:bg-obsidian-900/95 border border-stone-300 dark:border-zinc-700 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative">
+        <!-- Close Button -->
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 p-2 rounded-full bg-stone-200 dark:bg-obsidian-850 text-zinc-800 dark:text-zinc-200 hover:bg-stone-300 dark:hover:bg-zinc-700 transition-colors">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Image Container -->
+        <div class="p-6 overflow-y-auto flex-1 flex items-center justify-center bg-stone-100 dark:bg-black/50">
+          <img id="lightbox-img" src="" alt="Figma Design Preview" class="max-h-[60vh] w-auto object-contain rounded-xl shadow-lg">
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="p-6 border-t border-stone-200 dark:border-zinc-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 id="lightbox-title" class="text-xl font-serif text-zinc-900 dark:text-white font-medium"></h3>
+            <span id="lightbox-badge" class="text-xs text-zinc-500">Verified Preview</span>
+          </div>
+          <a id="lightbox-figma-link" href="#" target="_blank" rel="noreferrer" class="px-6 py-2.5 rounded-full bg-gradient-to-r from-amber-600 to-amber-500 dark:from-champagne-300 dark:to-champagne-400 text-white dark:text-obsidian-950 text-xs font-semibold uppercase tracking-wider inline-flex items-center gap-2 hover:brightness-110 shadow-md">
+            <span id="lightbox-btn-text">Inspect in Figma</span>
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education Section -->
+    <section id="education" class="space-y-8 scroll-mt-20">
+      <div class="border-b border-stone-200 dark:border-zinc-800/80 pb-6">
+        <span class="text-amber-700 dark:text-champagne-400 text-xs font-semibold uppercase tracking-widest">Academic Background</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-light text-zinc-900 dark:text-white mt-1">Education</h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <!-- College -->
+        <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
+          <div class="space-y-1">
+            <div class="text-lg font-serif font-medium text-zinc-900 dark:text-white">Cebu Technological University – Argao Campus</div>
+            <p class="text-sm text-amber-700 dark:text-champagne-300 font-medium">Bachelor of Science in Information Technology (BSIT)</p>
+            <p class="text-xs text-zinc-500 font-light">Undergraduate Degree Program</p>
+          </div>
+          <span class="text-xs font-medium tracking-wider uppercase text-amber-800 dark:text-champagne-300 bg-amber-500/10 dark:bg-champagne-400/10 px-4 py-1.5 rounded-full border border-amber-500/20 dark:border-champagne-400/25 whitespace-nowrap self-start md:self-auto">
+            2023 — Present
+          </span>
+        </div>
+
+        <!-- Senior High School -->
+        <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
+          <div class="space-y-1">
+            <div class="text-lg font-serif font-medium text-zinc-900 dark:text-white">Dalaguete National High School</div>
+            <p class="text-sm text-zinc-700 dark:text-zinc-300">Senior High School &bull; <span class="text-amber-700 dark:text-champagne-300 font-semibold">Graduated With Honors</span> (Grade 11 & 12 STEM)</p>
+            <p class="text-xs text-zinc-500 font-light">Grade 11 - 12 STEM Academic Honor Awards &amp; Certificates of Recognition</p>
+          </div>
+          <div class="flex items-center gap-3 self-start md:self-auto">
+            <button onclick="openLightbox('./cert-honors-combined.jpg', 'Academic Honors Recognition — Grade 11 & 12 (With Honors), Dalaguete NHS', './cert-honors-combined.jpg')" class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline cursor-pointer">
+              <span>View Honors Certs</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-xs font-medium tracking-wider uppercase text-zinc-600 dark:text-zinc-400 bg-stone-100 dark:bg-obsidian-950 px-4 py-1.5 rounded-full border border-stone-200 dark:border-zinc-800 whitespace-nowrap">
+              2021 — 2023
+            </span>
+          </div>
+        </div>
+
+        <!-- Junior High School -->
+        <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
+          <div class="space-y-1">
+            <div class="text-lg font-serif font-medium text-zinc-900 dark:text-white">Caleriohan National High School</div>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Secondary Education</p>
+          </div>
+          <span class="text-xs font-medium tracking-wider uppercase text-zinc-600 dark:text-zinc-400 bg-stone-100 dark:bg-obsidian-950 px-4 py-1.5 rounded-full border border-stone-200 dark:border-zinc-800 whitespace-nowrap self-start md:self-auto">
+            2017 — 2021
+          </span>
+        </div>
+
+        <!-- Elementary -->
+        <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
+          <div class="space-y-1">
+            <div class="text-lg font-serif font-medium text-zinc-900 dark:text-white">Caleriohan Elementary School</div>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400">Primary Education</p>
+          </div>
+          <span class="text-xs font-medium tracking-wider uppercase text-zinc-600 dark:text-zinc-400 bg-stone-100 dark:bg-obsidian-950 px-4 py-1.5 rounded-full border border-stone-200 dark:border-zinc-800 whitespace-nowrap self-start md:self-auto">
+            2017 — 2021
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Certifications & Skills -->
+    <section id="skills" class="space-y-8 scroll-mt-20">
+      <div class="border-b border-stone-200 dark:border-zinc-800/80 pb-6">
+        <span class="text-amber-700 dark:text-champagne-400 text-xs font-semibold uppercase tracking-widest">Verified Credentials</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-light text-zinc-900 dark:text-white mt-1">Certifications & Competencies</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- Certificate 1: IBM SkillsBuild Cybersecurity Fundamentals -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.18)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./cert-ibm.png', 'Cybersecurity Fundamentals — IBM SkillsBuild', 'https://www.credly.com/badges/3dadec0d-c40f-4b5f-b488-994d2dde8db1')">
+              <img src="./cert-ibm.png" alt="Cybersecurity Fundamentals IBM SkillsBuild Certificate" class="w-full h-full object-contain bg-white dark:bg-obsidian-950 p-1 group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> View Certificate
+                </span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-300 border border-blue-500/20">IBM SkillsBuild</span>
+              <span class="text-[10px] text-zinc-500 font-medium">Oct 28, 2026</span>
+            </div>
+
+            <h3 class="font-serif text-lg text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Cybersecurity Fundamentals
+            </h3>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Professional credential awarded by IBM SkillsBuild verifying competence in core cybersecurity principles, threat mitigation, and digital defense.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">Credly Verified</span>
+            <a href="https://www.credly.com/badges/3dadec0d-c40f-4b5f-b488-994d2dde8db1" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Verify Badge</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Certificate 2: Cisco Packet Tracer -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.18)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./cert-cisco.png', 'Getting Started with Cisco Packet Tracer — Cisco Networking Academy', './cert-cisco.png')">
+              <img src="./cert-cisco.png" alt="Cisco Packet Tracer Certificate of Completion" class="w-full h-full object-contain bg-white dark:bg-obsidian-950 p-1 group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> View Certificate
+                </span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">Cisco Academy</span>
+              <span class="text-[10px] text-zinc-500 font-medium">14 Oct 2026</span>
+            </div>
+
+            <h3 class="font-serif text-lg text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Getting Started with Cisco Packet Tracer
+            </h3>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Certified by Cisco Networking Academy (Cert ID: 4dd20bc2-4715-4eda). Hands-on network topology modeling, router configurations, and protocol testing.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">Cert ID Verified</span>
+            <button onclick="openLightbox('./cert-cisco.png', 'Getting Started with Cisco Packet Tracer — Cisco Networking Academy', './cert-cisco.png')" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline cursor-pointer">
+              <span>View Full Cert</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Certificate 3: Simplilearn Cybersecurity in Finance -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.18)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./cert-simplilearn.png', 'Cybersecurity in Finance — Simplilearn SkillUp', './cert-simplilearn.png')">
+              <img src="./cert-simplilearn.png" alt="Cybersecurity in Finance Simplilearn Certificate" class="w-full h-full object-contain bg-white dark:bg-obsidian-950 p-1 group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> View Certificate
+                </span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-champagne-300 border border-amber-500/20">Simplilearn SkillUp</span>
+              <span class="text-[10px] text-zinc-500 font-medium">15 Oct 2026</span>
+            </div>
+
+            <h3 class="font-serif text-lg text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Cybersecurity in Finance
+            </h3>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Certificate of completion in financial sector cybersecurity, secure transaction protocols, regulatory standards, and vulnerability mitigation.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">Verified Certificate</span>
+            <button onclick="openLightbox('./cert-simplilearn.png', 'Cybersecurity in Finance — Simplilearn SkillUp', './cert-simplilearn.png')" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline cursor-pointer">
+              <span>View Full Cert</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Certificate 4: Udemy Figma UI UX Design Essentials -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.18)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./cert-udemy-figma.png', 'Figma UI UX Design Essentials — Udemy (Daniel Walter Scott)', 'https://ude.my/UC-fb48d6c2-e3cc-4b81-9149-f82769d24d7f')">
+              <img src="./cert-udemy-figma.png" alt="Udemy Figma UI UX Design Essentials Certificate" class="w-full h-full object-contain bg-white dark:bg-obsidian-950 p-1 group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> View Certificate
+                </span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">Udemy &bull; 9.5 Hours</span>
+              <span class="text-[10px] text-zinc-500 font-medium">Oct 28, 2026</span>
+            </div>
+
+            <h3 class="font-serif text-lg text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Figma UI UX Design Essentials
+            </h3>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Comprehensive industry training by Daniel Walter Scott covering design systems, high-fidelity responsive wireframing, component tokens, and interactive prototyping.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">UC-fb48d6c2 Verified</span>
+            <a href="https://ude.my/UC-fb48d6c2-e3cc-4b81-9149-f82769d24d7f" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline">
+              <span>Verify Certificate</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Certificate 5: Parsers Organization Leadership Award -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.18)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./cert-parsers-leadership.jpg', 'Certificate of Recognition — Logistics Committee, Parsers Organization (CTU-AC)', './cert-parsers-leadership.jpg')">
+              <img src="./cert-parsers-leadership.jpg" alt="Parsers Organization Leadership Certificate of Recognition" class="w-full h-full object-contain bg-white dark:bg-obsidian-950 p-1 group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> View Certificate
+                </span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">CTU-AC &bull; Parsers Org</span>
+              <span class="text-[10px] text-zinc-500 font-medium">Aug 26, 2026</span>
+            </div>
+
+            <h3 class="font-serif text-lg text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Logistics Committee Leadership Award
+            </h3>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Presented by CTU-AC BSIT Department for exemplary leadership and unwavering service in the Parsers Organization, fostering collaboration and technical proficiency.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">Official Recognition</span>
+            <button onclick="openLightbox('./cert-parsers-leadership.jpg', 'Certificate of Recognition — Logistics Committee, Parsers Organization (CTU-AC)', './cert-parsers-leadership.jpg')" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline cursor-pointer">
+              <span>View Full Cert</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Certificate 6: Dalaguete NHS Academic Honors (Grade 11 & 12) -->
+        <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.18)] rounded-2xl p-5 flex flex-col justify-between group hover:shadow-xl dark:hover:border-champagne-300/30 transition-all duration-300">
+          <div>
+            <div class="w-full h-44 rounded-xl overflow-hidden mb-4 relative bg-stone-900 border border-stone-200 dark:border-zinc-800 cursor-pointer" onclick="openLightbox('./cert-honors-combined.jpg', 'Academic Honors Recognition — Grade 11 & 12 (With Honors), Dalaguete NHS', './cert-honors-combined.jpg')">
+              <img src="./cert-honors-combined.jpg" alt="Senior High School Grade 11 and 12 With Honors Certificates" class="w-full h-full object-contain bg-white dark:bg-obsidian-950 p-1 group-hover:scale-105 transition-transform duration-500">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/75 backdrop-blur-xs text-white text-[11px] px-3 py-1 rounded-full flex items-center gap-1">
+                  <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> View Certificates
+                </span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-800 dark:text-champagne-300 border border-amber-500/20">With Honors &bull; Grade 11 & 12</span>
+              <span class="text-[10px] text-zinc-500 font-medium">2021 — 2023</span>
+            </div>
+
+            <h3 class="font-serif text-lg text-zinc-900 dark:text-white mb-1 group-hover:text-amber-700 dark:group-hover:text-champagne-200 transition-colors">
+              Academic Honors Recognition
+            </h3>
+            <p class="text-xs text-zinc-600 dark:text-zinc-400 font-light leading-relaxed mb-4">
+              Official Certificates of Recognition awarded for consistent academic excellence With Honors in Senior High School (STEM Strand) at Dalaguete National High School.
+            </p>
+          </div>
+
+          <div class="pt-3 border-t border-stone-200 dark:border-zinc-800 flex items-center justify-between">
+            <span class="text-[11px] text-zinc-500 font-medium">Dual Honors Award</span>
+            <button onclick="openLightbox('./cert-honors-combined.jpg', 'Academic Honors Recognition — Grade 11 & 12 (With Honors), Dalaguete NHS', './cert-honors-combined.jpg')" class="inline-flex items-center gap-1 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline cursor-pointer">
+              <span>View Full Certificates</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Leadership & Involvement -->
+    <section id="leadership" class="space-y-8 scroll-mt-20">
+      <div class="border-b border-stone-200 dark:border-zinc-800/80 pb-6">
+        <span class="text-amber-700 dark:text-champagne-400 text-xs font-semibold uppercase tracking-widest">Leadership & Experience</span>
+        <h2 class="text-3xl sm:text-4xl font-serif font-light text-zinc-900 dark:text-white mt-1">Involvement & Immersion</h2>
+      </div>
+
+      <div class="space-y-4">
+        
+        <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
+          <div class="space-y-1">
+            <div class="text-lg font-serif font-medium text-zinc-900 dark:text-white">Logistics Committee Officer &bull; Parsers Organization</div>
+            <p class="text-xs text-zinc-500 font-light">Awarded Certificate of Recognition for outstanding leadership, unwavering dedication, and exemplary service as Logistics Committee for Academic Year 2025–2026. Directing event logistics, operations equipment, and team coordination for collegiate BSIT programs.</p>
+          </div>
+          <div class="flex items-center gap-3 self-start md:self-auto">
+            <button onclick="openLightbox('./cert-parsers-leadership.jpg', 'Certificate of Recognition — Logistics Committee, Parsers Organization (CTU-AC)', './cert-parsers-leadership.jpg')" class="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 dark:text-champagne-300 hover:underline cursor-pointer">
+              <span>View Certificate</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </button>
+            <span class="text-xs font-medium tracking-wider uppercase text-amber-800 dark:text-champagne-300 bg-amber-500/10 dark:bg-champagne-400/10 px-4 py-1.5 rounded-full border border-amber-500/20 dark:border-champagne-400/25 whitespace-nowrap">
+              A.Y. 2025 — 2026
+            </span>
+          </div>
+        </div>
+
+        <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
+          <div class="space-y-1">
+            <div class="text-lg font-serif font-medium text-zinc-900 dark:text-white">Member / Officer &bull; Parsers Organization</div>
+            <p class="text-xs text-zinc-500 font-light">Collaborative participation in department coding workshops, student mentoring, and tech seminars.</p>
+          </div>
+          <span class="text-xs font-medium tracking-wider uppercase text-zinc-600 dark:text-zinc-400 bg-stone-100 dark:bg-obsidian-950 px-4 py-1.5 rounded-full border border-stone-200 dark:border-zinc-800 whitespace-nowrap self-start md:self-auto">
+            A.Y. 2026 — 2027
+          </span>
+        </div>
+
+        <div class="glass-panel bg-white/80 dark:bg-obsidian-850/70 border border-stone-200 dark:border-zinc-800/80 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row justify-between md:items-center gap-4 shadow-sm">
+          <div class="space-y-1">
+            <div class="text-lg font-serif font-medium text-zinc-900 dark:text-white">Work Immersion Trainee &bull; Dalaguete Municipal Motorpool</div>
+            <p class="text-xs text-zinc-500 font-light">Public sector work immersion developing structured workplace discipline, equipment maintenance logs, and operational reporting.</p>
+          </div>
+          <span class="text-xs font-medium tracking-wider uppercase text-zinc-600 dark:text-zinc-400 bg-stone-100 dark:bg-obsidian-950 px-4 py-1.5 rounded-full border border-stone-200 dark:border-zinc-800 whitespace-nowrap self-start md:self-auto">
+            Immersion 2024
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact & Inquiries Section -->
+    <section id="contact" class="space-y-8 scroll-mt-20">
+      <div class="glass-panel bg-white/90 dark:bg-obsidian-850/80 border border-stone-200 dark:border-[rgba(224,194,157,0.25)] rounded-3xl p-8 sm:p-14 relative overflow-hidden shadow-xl">
+        <div class="max-w-2xl">
+          <span class="text-amber-700 dark:text-champagne-400 text-xs font-semibold uppercase tracking-widest">Connect With Me</span>
+          <h2 class="text-3xl sm:text-5xl font-serif font-light text-zinc-900 dark:text-white tracking-tight mt-1 mb-4">Let's discuss an opportunity.</h2>
+          <p class="text-zinc-600 dark:text-zinc-300 text-sm font-light leading-relaxed mb-8">
+            I am currently open to <strong class="text-amber-800 dark:text-champagne-200 font-medium">On-the-Job Training (OJT)</strong>, internships, and junior IT positions. Contact me directly or send a message below.
+          </p>
+
+          <!-- Contact Cards Grid -->
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            
+            <!-- Email -->
+            <div class="p-4 rounded-xl bg-stone-50 dark:bg-obsidian-950 border border-stone-200 dark:border-zinc-800 flex items-center justify-between sm:col-span-2 lg:col-span-3">
+              <div class="overflow-hidden mr-2">
+                <div class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold">Direct Email</div>
+                <div class="text-xs text-zinc-900 dark:text-zinc-200 truncate font-mono" id="email-address">ludoviceramceejademunoz@gmail.com</div>
+              </div>
+              <button id="copy-email-btn" class="px-3 py-1.5 rounded-lg bg-amber-500/10 dark:bg-champagne-400/10 text-amber-700 dark:text-champagne-300 hover:bg-amber-600 hover:text-white dark:hover:bg-champagne-400 dark:hover:text-obsidian-950 transition-colors text-xs font-medium flex items-center gap-1.5" title="Copy Email">
+                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                <span>Copy</span>
+              </button>
+            </div>
+
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/ramcee-jade-mu%C3%B1oz" target="_blank" rel="noreferrer" class="p-4 rounded-xl bg-stone-50 dark:bg-obsidian-950 border border-stone-200 dark:border-zinc-800 flex items-center justify-between hover:border-amber-600 dark:hover:border-champagne-300/40 transition-colors group">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-blue-600/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg>
+                </div>
+                <div>
+                  <div class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold">LinkedIn</div>
+                  <div class="text-xs text-zinc-900 dark:text-zinc-200 font-medium group-hover:text-amber-700 dark:group-hover:text-champagne-200">Ramcee Jade Muñoz</div>
+                </div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-amber-600 dark:text-champagne-300"></i>
+            </a>
+
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/ramcee.jade" target="_blank" rel="noreferrer" class="p-4 rounded-xl bg-stone-50 dark:bg-obsidian-950 border border-stone-200 dark:border-zinc-800 flex items-center justify-between hover:border-amber-600 dark:hover:border-champagne-300/40 transition-colors group">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 dark:text-blue-400 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </div>
+                <div>
+                  <div class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold">Facebook</div>
+                  <div class="text-xs text-zinc-900 dark:text-zinc-200 font-medium group-hover:text-amber-700 dark:group-hover:text-champagne-200">Ramcee Jade</div>
+                </div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-amber-600 dark:text-champagne-300"></i>
+            </a>
+
+            <!-- GitHub -->
+            <a href="https://github.com/Ramcee4" target="_blank" rel="noreferrer" class="p-4 rounded-xl bg-stone-50 dark:bg-obsidian-950 border border-stone-200 dark:border-zinc-800 flex items-center justify-between hover:border-amber-600 dark:hover:border-champagne-300/40 transition-colors group">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-stone-700/10 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </div>
+                <div>
+                  <div class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold">GitHub</div>
+                  <div class="text-xs text-zinc-900 dark:text-zinc-200 font-medium group-hover:text-amber-700 dark:group-hover:text-champagne-200">Ramcee4</div>
+                </div>
+              </div>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-amber-600 dark:text-champagne-300"></i>
+            </a>
+
+            <!-- Location -->
+            <div class="p-4 rounded-xl bg-stone-50 dark:bg-obsidian-950 border border-stone-200 dark:border-zinc-800 flex items-center gap-3 sm:col-span-2 lg:col-span-3">
+              <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-700 dark:text-champagne-300 flex items-center justify-center">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+              </div>
+              <div>
+                <div class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold">Location</div>
+                <div class="text-xs text-zinc-900 dark:text-zinc-200">Caleriohan, Dalaguete, Cebu, Philippines</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Contact Form (Live Connected to Gmail via FormSubmit) -->
+          <form id="contact-form" class="space-y-4 max-w-lg">
+            <input type="hidden" name="_subject" value="New Portfolio Inquiry - Ramcee Jade Muñoz">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+
+            <div>
+              <label for="name" class="block text-[11px] uppercase tracking-widest text-zinc-500 mb-2 font-medium">Your Name / Company</label>
+              <input type="text" id="name" name="name" required placeholder="Recruiter / Organization" class="w-full px-4 py-3 rounded-xl bg-stone-50 dark:bg-obsidian-950 border border-stone-300 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-amber-600 dark:focus:border-champagne-400/50 transition-colors">
+            </div>
+            <div>
+              <label for="email" class="block text-[11px] uppercase tracking-widest text-zinc-500 mb-2 font-medium">Your Email Address</label>
+              <input type="email" id="email" name="email" required placeholder="contact@company.com" class="w-full px-4 py-3 rounded-xl bg-stone-50 dark:bg-obsidian-950 border border-stone-300 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-amber-600 dark:focus:border-champagne-400/50 transition-colors">
+            </div>
+            <div>
+              <label for="message" class="block text-[11px] uppercase tracking-widest text-zinc-500 mb-2 font-medium">Message</label>
+              <textarea id="message" name="message" rows="4" required placeholder="Tell me about your OJT opportunity, project, or role..." class="w-full px-4 py-3 rounded-xl bg-stone-50 dark:bg-obsidian-950 border border-stone-300 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white focus:outline-none focus:border-amber-600 dark:focus:border-champagne-400/50 transition-colors resize-none"></textarea>
+            </div>
+
+            <!-- Form Status Alert -->
+            <div id="form-status" class="hidden p-4 rounded-xl text-xs leading-relaxed font-light border"></div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-1">
+              <button id="submit-btn" type="submit" class="px-8 py-3.5 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-obsidian-950 font-semibold text-xs tracking-wider uppercase hover:bg-zinc-800 dark:hover:bg-champagne-100 transition-colors inline-flex items-center gap-2 cursor-pointer shadow-md">
+                <span id="submit-btn-text">Send Message</span>
+                <i id="submit-btn-icon" data-lucide="send" class="w-3.5 h-3.5"></i>
+              </button>
+              
+              <a href="mailto:ludoviceramceejademunoz@gmail.com?subject=Portfolio%20Inquiry%20for%20Ramcee%20Jade%20Muñoz" class="px-6 py-3.5 rounded-xl bg-stone-100 dark:bg-obsidian-900 border border-stone-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 hover:text-amber-700 dark:hover:text-champagne-300 hover:border-amber-600 dark:hover:border-champagne-300 font-semibold text-xs tracking-wider uppercase transition-colors inline-flex items-center gap-2">
+                <span>Open in Email App</span>
+                <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              </a>
+            </div>
+
+            <p class="text-[11px] text-zinc-500 font-light flex items-center gap-1.5 pt-1">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400"></i>
+              <span>Messages are delivered directly to ludoviceramceejademunoz@gmail.com</span>
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-8 right-8 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none glass-panel bg-white/95 dark:bg-obsidian-900/95 border border-amber-600/30 dark:border-champagne-400/40 px-6 py-3.5 rounded-xl flex items-center gap-3 text-xs uppercase tracking-wider text-zinc-900 dark:text-champagne-100 shadow-2xl">
+    <i data-lucide="check" class="w-4 h-4 text-amber-600 dark:text-champagne-300"></i>
+    <span id="toast-msg">Copied to clipboard</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="border-t border-stone-200 dark:border-zinc-800/80 py-10 relative z-10 text-center text-xs text-zinc-500">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-6 h-6 rounded-full overflow-hidden border border-amber-600/40 dark:border-champagne-300/40">
+          <img src="./profile.jpg" alt="Ramcee" class="w-full h-full object-cover object-top">
+        </div>
+        <span>&copy; 2026 Ramcee Jade L. Muñoz &bull; Deployed on <a href="https://vercel.com" class="text-zinc-600 dark:text-zinc-400 hover:text-amber-700 dark:hover:text-champagne-200 underline">Vercel</a>.</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-5 text-xs">
+        <a href="https://github.com/Ramcee4" target="_blank" rel="noreferrer" class="text-zinc-500 hover:text-amber-700 dark:hover:text-champagne-300 transition-colors flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>GitHub</span>
+        </a>
+        <a href="https://www.linkedin.com/in/ramcee-jade-mu%C3%B1oz" target="_blank" rel="noreferrer" class="text-zinc-500 hover:text-amber-700 dark:hover:text-champagne-300 transition-colors flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://www.facebook.com/ramcee.jade" target="_blank" rel="noreferrer" class="text-zinc-500 hover:text-amber-700 dark:hover:text-champagne-300 transition-colors flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Facebook</span>
+        </a>
+        <span class="text-stone-300 dark:text-zinc-700 hidden sm:inline">&bull;</span>
+        <a href="#hero" class="text-zinc-500 hover:text-amber-700 dark:hover:text-champagne-200 transition-colors uppercase tracking-widest text-[11px]">Return to Top &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Light / Dark Mode Toggle Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const htmlEl = document.documentElement;
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (htmlEl.classList.contains('dark')) {
+        htmlEl.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        htmlEl.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      lucide.createIcons();
+    });
+
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+
+    // Toast helper
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 3200);
+    }
+
+    // Copy Email
+    const copyBtn = document.getElementById('copy-email-btn');
+    const emailAddress = document.getElementById('email-address').textContent;
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(emailAddress);
+        showToast('Email address copied!');
+      } catch (err) {
+        showToast('Copied: ' + emailAddress);
+      }
+    });
+
+    // Live Email Form Submission via FormSubmit AJAX API
+    const contactForm = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const submitBtnText = document.getElementById('submit-btn-text');
+    const formStatus = document.getElementById('form-status');
+
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      // Set Loading State
+      submitBtn.disabled = true;
+      submitBtnText.textContent = 'Sending Message...';
+      submitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+
+      try {
+        const response = await fetch("https://formsubmit.co/ajax/ludoviceramceejademunoz@gmail.com", {
+          method: "POST",
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            name: name,
+            email: email,
+            message: message,
+            _subject: `New Portfolio Inquiry from ${name}`,
+            _template: 'table'
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          formStatus.className = 'p-4 rounded-xl text-xs leading-relaxed border bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border-emerald-500/30 flex items-start gap-2.5';
+          formStatus.innerHTML = '<i data-lucide="check-circle" class="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400 mt-0.5"></i><span><strong>Message sent successfully!</strong> Your message has been delivered directly to Ramcee\'s inbox.</span>';
+          formStatus.classList.remove('hidden');
+          showToast('Message sent to Ramcee!');
+          contactForm.reset();
+        } else {
+          throw new Error(data.message || 'Submission error');
+        }
+      } catch (err) {
+        // Safe fallback to native mail client if network/CORS fails
+        formStatus.className = 'p-4 rounded-xl text-xs leading-relaxed border bg-amber-500/10 text-amber-800 dark:text-champagne-200 border-amber-500/30 flex items-start gap-2.5';
+        formStatus.innerHTML = '<i data-lucide="info" class="w-4 h-4 shrink-0 text-amber-600 dark:text-champagne-300 mt-0.5"></i><span>Sending via web service was blocked. Opening your email app to send directly...</span>';
+        formStatus.classList.remove('hidden');
+        
+        setTimeout(() => {
+          window.location.href = `mailto:ludoviceramceejademunoz@gmail.com?subject=Portfolio%20Inquiry%20from%20${encodeURIComponent(name)}&body=${encodeURIComponent(message + "\n\nFrom: " + name + " (" + email + ")")}`;
+        }, 1200);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtnText.textContent = 'Send Message';
+        submitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+        lucide.createIcons();
+      }
+    });
+
+    // Lightbox Modal for Figma Moodboard & Certificates
+    function openLightbox(imgSrc, title, actionUrl) {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      const titleEl = document.getElementById('lightbox-title');
+      const linkEl = document.getElementById('lightbox-figma-link');
+      const badgeEl = document.getElementById('lightbox-badge');
+      const btnTextEl = document.getElementById('lightbox-btn-text');
+
+      img.src = imgSrc;
+      titleEl.textContent = title;
+      linkEl.href = actionUrl || imgSrc;
+
+      if (actionUrl && actionUrl.includes('figma.com')) {
+        if (badgeEl) badgeEl.textContent = 'Interactive Figma Prototype';
+        if (btnTextEl) btnTextEl.textContent = 'Inspect in Figma';
+      } else if (actionUrl && actionUrl.includes('github.com')) {
+        if (badgeEl) badgeEl.textContent = 'Official GitHub Repository';
+        if (btnTextEl) btnTextEl.textContent = 'View on GitHub';
+      } else if (actionUrl && actionUrl.includes('credly.com')) {
+        if (badgeEl) badgeEl.textContent = 'Official IBM Credly Badge';
+        if (btnTextEl) btnTextEl.textContent = 'Verify on Credly';
+      } else if (actionUrl && (actionUrl.includes('ude.my') || actionUrl.includes('udemy.com'))) {
+        if (badgeEl) badgeEl.textContent = 'Official Udemy Certificate';
+        if (btnTextEl) btnTextEl.textContent = 'Verify on Udemy';
+      } else if (actionUrl && (actionUrl.endsWith('.png') || actionUrl.endsWith('.jpg'))) {
+        if (badgeEl) badgeEl.textContent = 'Verified Official Certificate';
+        if (btnTextEl) btnTextEl.textContent = 'Open Full Resolution';
+      } else {
+        if (badgeEl) badgeEl.textContent = 'Verified Credential';
+        if (btnTextEl) btnTextEl.textContent = 'View Credential';
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Close lightbox on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Real-Time Photo Insert / Swap Handler
+    const photoUploadInput = document.getElementById('photo-upload-input');
+    const moodboardDisplayPhoto = document.getElementById('moodboard-display-photo');
+
+    if (photoUploadInput) {
+      photoUploadInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            moodboardDisplayPhoto.src = evt.target.result;
+            showToast('New photo inserted into moodboard!');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Toggle Moodboard (Show / Unshow)
+    const moodboardSection = document.getElementById('moodboard');
+    const toggleMoodboardBtn = document.getElementById('toggle-moodboard-btn');
+    const toggleMoodboardText = document.getElementById('toggle-moodboard-text');
+    const toggleMoodboardIcon = document.getElementById('toggle-moodboard-icon');
+
+    function toggleMoodboard() {
+      if (moodboardSection.classList.contains('hidden')) {
+        // Show UI/UX Prototypes
+        moodboardSection.classList.remove('hidden');
+        if (toggleMoodboardText) toggleMoodboardText.textContent = 'Collapse UI/UX Prototypes';
+        if (toggleMoodboardIcon) toggleMoodboardIcon.classList.add('rotate-180');
+        setTimeout(() => {
+          moodboardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
+      } else {
+        // Unshow / Hide UI/UX Prototypes
+        moodboardSection.classList.add('hidden');
+        if (toggleMoodboardText) toggleMoodboardText.textContent = 'Explore UI/UX Prototypes';
+        if (toggleMoodboardIcon) toggleMoodboardIcon.classList.remove('rotate-180');
+        const projectDesignCard = document.getElementById('project-design-card');
+        if (projectDesignCard) {
+          projectDesignCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+      lucide.createIcons();
+    }
+
+    if (toggleMoodboardBtn) {
+      toggleMoodboardBtn.addEventListener('click', toggleMoodboard);
+    }
+
+    // Also handle clicks on navbar "UI/UX Prototypes" links
+    document.querySelectorAll('a[href="#moodboard"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (moodboardSection.classList.contains('hidden')) {
+          moodboardSection.classList.remove('hidden');
+          if (toggleMoodboardText) toggleMoodboardText.textContent = 'Collapse UI/UX Prototypes';
+          if (toggleMoodboardIcon) toggleMoodboardIcon.classList.add('rotate-180');
+          lucide.createIcons();
+        }
+        moodboardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Active Navigation ScrollSpy Highlight
+    const navSectionIds = ['about', 'projects', 'moodboard', 'education', 'skills', 'leadership', 'contact'];
+    const navLinks = document.querySelectorAll('.nav-link');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    function setActiveNavSection(sectionId) {
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (sectionId && href === `#${sectionId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      mobileNavLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (sectionId && href === `#${sectionId}`) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    function updateActiveNav() {
+      const scrollPosition = window.scrollY + 160; // Offset for navbar header
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // Bottom of page check -> activate contact
+      if (window.scrollY + windowHeight >= documentHeight - 60) {
+        setActiveNavSection('contact');
+        return;
+      }
+
+      // If at top hero area, clear active state
+      if (window.scrollY < 260) {
+        setActiveNavSection('');
+        return;
+      }
+
+      let currentSection = '';
+
+      for (const id of navSectionIds) {
+        const el = document.getElementById(id);
+        if (el && !el.classList.contains('hidden')) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            currentSection = id;
+            break;
+          }
+        }
+      }
+
+      setActiveNavSection(currentSection);
+    }
+
+    let scrollTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!scrollTicking) {
+        window.requestAnimationFrame(() => {
+          updateActiveNav();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          setActiveNavSection(href.substring(1));
+        }
+      });
+    });
+
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const href = link.getAttribute('href');
+        if (href && href.startsWith('#')) {
+          setActiveNavSection(href.substring(1));
+        }
+      });
+    });
+
+    window.addEventListener('resize', updateActiveNav);
+    window.addEventListener('load', updateActiveNav);
+    document.addEventListener('DOMContentLoaded', updateActiveNav);
+    updateActiveNav();
+  </script>
+</body>
+</html>
